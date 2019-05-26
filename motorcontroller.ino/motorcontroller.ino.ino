@@ -6,7 +6,7 @@ Servo motorC;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(115200);
   Serial.println("start");
   motor[0] = 90;
   motor[1] = 90;
@@ -14,24 +14,26 @@ void setup() {
   motorA.attach(6);
   motorB.attach(7);
   motorC.attach(8);
+  
   Serial.println("setup done");
 }
 
 void getAngles(){
-  if(Serial.available()>0){
-    String received = Serial.readString();
-    Serial.println(received);
-    String temp = "";
-    int counter = 0;
-    for(int i = 0; i < received.length(); i++){
-      if(received[i] == ';'){
-        motor[counter] = temp.toInt();
-        Serial.println(motor[counter]);
-        counter ++;
-        temp = "";
-      } else{
-        temp += received[i];
-      }
+  String received = Serial.readStringUntil('\n');
+  String temp = "";
+  int counter = 0;
+  
+  for(int i = 0; i < received.length(); i++){
+    if(received[i] == ';'){
+      motor[counter] = temp.toInt();
+      //Serial.println(motor[counter]);
+      counter ++;
+      temp = "";
+    }else if(received[i] == '\n'){
+      
+      return;
+    } else{
+      temp += received[i];
     }
   }
 }
@@ -44,7 +46,13 @@ void setMotor(){
 
 void loop() {
   // put your main code here, to run repeatedly:
-  getAngles();
+  if(Serial.available()){  
+    
+    getAngles(); 
+  
+    
+  }
   setMotor();
-  delay(100);
+  
+  
 }

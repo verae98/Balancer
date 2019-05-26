@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 project( Balancer )
 find_package( OpenCV REQUIRED )
+link_directories(/usr/local/lib/)
+
+
 add_executable( Balancer main.cpp )
-target_link_libraries( Balancer ${OpenCV_LIBS} )
+
+target_link_libraries( Balancer ${OpenCV_LIBS})
+target_link_libraries( Balancer serial)
