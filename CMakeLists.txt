@@ -14,7 +14,7 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt5Widgets CONFIG REQUIRED)
 QT5_WRAP_UI( UI_HEADERS QT/mrb_window.ui QT/coordinate_popup.ui )
 
-add_executable( Balancer main.cpp sources/pidController.cpp headers/pidController.hpp QT/ui_mrb_window.cpp ${UI_HEADERS} QT/ui_CoordinatePopup.cpp QT/ui_CoordinatePopup.hpp)
+add_executable( Balancer main.cpp QT/pidController.cpp QT/pidController.hpp QT/ui_mrb_window.cpp ${UI_HEADERS} QT/ui_CoordinatePopup.cpp QT/ui_CoordinatePopup.hpp)
 
 target_link_libraries( Balancer ${OpenCV_LIBS})
 target_link_libraries( Balancer serial)

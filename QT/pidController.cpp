@@ -2,7 +2,7 @@
 // Created by florian on 6/1/19.
 //
 
-#include "../headers/pidController.hpp"
+#include "pidController.hpp"
 
 float PIDController::getDistanceTo(Vec2i target, Vec2i motor) {
     return sqrt(pow(target[0] - motor[0], 2) + pow(target[1] - motor[1], 2));

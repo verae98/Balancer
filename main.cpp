@@ -5,7 +5,7 @@
 #include <string>
 #include <unistd.h>
 #include <vector>
-#include "headers/pidController.hpp"
+#include "QT/pidController.hpp"
 #include "QT/ui_mrb_window.hpp"
 #include "QT/ui_CoordinatePopup.hpp"
 #include <QApplication>

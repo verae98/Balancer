@@ -10,7 +10,7 @@
 #include "opencv2/opencv.hpp"
 #include <QTimer>
 #include <QtWidgets/QMessageBox>
-#include "../headers/pidController.hpp"
+#include "pidController.hpp"
 #include "ui_CoordinatePopup.hpp"
 #include <serial/serial.h>
 
