@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1123</width>
-    <height>468</height>
+    <height>525</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -100,10 +100,10 @@
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
-      <x>570</x>
+      <x>470</x>
       <y>10</y>
-      <width>531</width>
-      <height>411</height>
+      <width>631</width>
+      <height>481</height>
      </rect>
     </property>
     <property name="title">
@@ -114,8 +114,8 @@
       <rect>
        <x>0</x>
        <y>20</y>
-       <width>531</width>
-       <height>391</height>
+       <width>611</width>
+       <height>451</height>
       </rect>
      </property>
      <property name="text">
@@ -147,7 +147,7 @@
      <property name="title">
       <string>Kp</string>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -163,7 +163,7 @@
           <number>50000</number>
          </property>
          <property name="value">
-          <number>20</number>
+          <number>1000</number>
          </property>
         </widget>
        </item>
@@ -250,7 +250,7 @@
           <number>50000</number>
          </property>
          <property name="value">
-          <number>4</number>
+          <number>150</number>
          </property>
         </widget>
        </item>

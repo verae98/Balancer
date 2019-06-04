@@ -46,12 +46,12 @@ public:
     QLabel *camera_stream;
     QGroupBox *groupBox_4;
     QGroupBox *groupBox_5;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_2;
     QSpinBox *Kp_spinbox;
     QSlider *Kp_slider;
     QGroupBox *groupBox_6;
-    QWidget *layoutWidget;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout_3;
     QSpinBox *Ki_spinbox;
     QSlider *Ki_slider;
@@ -66,7 +66,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1123, 468);
+        MainWindow->resize(1123, 525);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         groupBox = new QGroupBox(centralwidget);
@@ -110,30 +110,30 @@ public:
 
         groupBox_3 = new QGroupBox(centralwidget);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
-        groupBox_3->setGeometry(QRect(570, 10, 531, 411));
+        groupBox_3->setGeometry(QRect(470, 10, 631, 481));
         camera_stream = new QLabel(groupBox_3);
         camera_stream->setObjectName(QStringLiteral("camera_stream"));
-        camera_stream->setGeometry(QRect(0, 20, 531, 391));
+        camera_stream->setGeometry(QRect(0, 20, 611, 451));
         groupBox_4 = new QGroupBox(centralwidget);
         groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
         groupBox_4->setGeometry(QRect(10, 140, 431, 281));
         groupBox_5 = new QGroupBox(groupBox_4);
         groupBox_5->setObjectName(QStringLiteral("groupBox_5"));
         groupBox_5->setGeometry(QRect(10, 30, 411, 71));
-        widget = new QWidget(groupBox_5);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(10, 30, 381, 28));
-        horizontalLayout_2 = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(groupBox_5);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 30, 381, 28));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
-        Kp_spinbox = new QSpinBox(widget);
+        Kp_spinbox = new QSpinBox(layoutWidget);
         Kp_spinbox->setObjectName(QStringLiteral("Kp_spinbox"));
         Kp_spinbox->setMaximum(50000);
-        Kp_spinbox->setValue(20);
+        Kp_spinbox->setValue(1000);
 
         horizontalLayout_2->addWidget(Kp_spinbox);
 
-        Kp_slider = new QSlider(widget);
+        Kp_slider = new QSlider(layoutWidget);
         Kp_slider->setObjectName(QStringLiteral("Kp_slider"));
         Kp_slider->setMaximum(50000);
         Kp_slider->setOrientation(Qt::Horizontal);
@@ -143,19 +143,19 @@ public:
         groupBox_6 = new QGroupBox(groupBox_4);
         groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
         groupBox_6->setGeometry(QRect(10, 110, 411, 71));
-        layoutWidget = new QWidget(groupBox_6);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(10, 30, 381, 28));
-        horizontalLayout_3 = new QHBoxLayout(layoutWidget);
+        layoutWidget1 = new QWidget(groupBox_6);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(10, 30, 381, 28));
+        horizontalLayout_3 = new QHBoxLayout(layoutWidget1);
         horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
-        Ki_spinbox = new QSpinBox(layoutWidget);
+        Ki_spinbox = new QSpinBox(layoutWidget1);
         Ki_spinbox->setObjectName(QStringLiteral("Ki_spinbox"));
         Ki_spinbox->setMaximum(50000);
 
         horizontalLayout_3->addWidget(Ki_spinbox);
 
-        Ki_slider = new QSlider(layoutWidget);
+        Ki_slider = new QSlider(layoutWidget1);
         Ki_slider->setObjectName(QStringLiteral("Ki_slider"));
         Ki_slider->setMaximum(50000);
         Ki_slider->setOrientation(Qt::Horizontal);
@@ -174,7 +174,7 @@ public:
         Kd_spinbox = new QSpinBox(layoutWidget_2);
         Kd_spinbox->setObjectName(QStringLiteral("Kd_spinbox"));
         Kd_spinbox->setMaximum(50000);
-        Kd_spinbox->setValue(4);
+        Kd_spinbox->setValue(150);
 
         horizontalLayout_4->addWidget(Kd_spinbox);
 

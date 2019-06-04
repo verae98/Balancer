@@ -101,14 +101,23 @@ void mrb_window::timerEvent(QTimerEvent *event) {
             action += std::to_string((int) motorC.getMappedPIDAction());
             action += ";\n";
             if (test % 10 == 0) {
-                due->write(action);
+                if(due->isOpen()) {
+                    due->write(action);
+                }else{
+                    due->open();
+                    due->write(action);
+                }
+                std::cout << action << std::endl;
+                test = 0;
             }
             test++;
-            std::cout << action << std::endl;
+
             action = "";
-            std::string rec = "";
-            std::cout << rec << std::endl;
-            circle(dest, center, radius, (255, 30, 255), 3, LINE_AA);
+            if(due->available()) {
+                std::string rec = due->readline();
+                std::cout << rec << std::endl;
+            }
+            circle(frame, center, radius, (255, 30, 255), 3, LINE_AA);
             break;
         }
     }

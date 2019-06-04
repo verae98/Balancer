@@ -31,7 +31,7 @@ public:
     QLabel *current_coordinates;
     QPushButton *confirm_btn;
     QPushButton *cancel_btn;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *label;
     QLabel *target_system_label;
@@ -40,37 +40,37 @@ public:
     {
         if (Form->objectName().isEmpty())
             Form->setObjectName(QStringLiteral("Form"));
-        Form->resize(714, 458);
+        Form->resize(760, 619);
         currently_selected = new QLabel(Form);
         currently_selected->setObjectName(QStringLiteral("currently_selected"));
-        currently_selected->setGeometry(QRect(350, 10, 191, 31));
+        currently_selected->setGeometry(QRect(400, 10, 191, 31));
         groupBox_3 = new QGroupBox(Form);
         groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
-        groupBox_3->setGeometry(QRect(10, 40, 531, 411));
+        groupBox_3->setGeometry(QRect(10, 40, 611, 491));
         camera_still = new QLabel(groupBox_3);
         camera_still->setObjectName(QStringLiteral("camera_still"));
-        camera_still->setGeometry(QRect(0, 20, 531, 391));
+        camera_still->setGeometry(QRect(0, 20, 611, 471));
         current_coordinates = new QLabel(Form);
         current_coordinates->setObjectName(QStringLiteral("current_coordinates"));
-        current_coordinates->setGeometry(QRect(560, 10, 121, 31));
+        current_coordinates->setGeometry(QRect(600, 10, 121, 31));
         confirm_btn = new QPushButton(Form);
         confirm_btn->setObjectName(QStringLiteral("confirm_btn"));
-        confirm_btn->setGeometry(QRect(590, 60, 80, 25));
+        confirm_btn->setGeometry(QRect(630, 60, 80, 25));
         cancel_btn = new QPushButton(Form);
         cancel_btn->setObjectName(QStringLiteral("cancel_btn"));
-        cancel_btn->setGeometry(QRect(590, 100, 80, 25));
-        widget = new QWidget(Form);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(10, 10, 201, 19));
-        horizontalLayout = new QHBoxLayout(widget);
+        cancel_btn->setGeometry(QRect(630, 100, 80, 25));
+        layoutWidget = new QWidget(Form);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(10, 10, 201, 19));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget);
         label->setObjectName(QStringLiteral("label"));
 
         horizontalLayout->addWidget(label);
 
-        target_system_label = new QLabel(widget);
+        target_system_label = new QLabel(layoutWidget);
         target_system_label->setObjectName(QStringLiteral("target_system_label"));
 
         horizontalLayout->addWidget(target_system_label);
