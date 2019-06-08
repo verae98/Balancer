@@ -71,6 +71,50 @@ void PIDController::calculateError(const Vec2i &ballPos) {
     current_error = distanceSetpointCenter - distanceBallCenter + (getDistanceTo(ballPos, BallOnLine) / 4 );
 
 
+    // input vera:
+    /*
+    auto zero = center_point;
+    auto motor = motor_pos;
+    auto ball = ballPos;
+    auto set_point = setpoint;
+
+    Vec2f BallOnLine;
+
+    ball[0] = ball[0] - zero[0];
+    ball[1] = ball[1] - zero[1];
+
+    motor[0] = motor[0] - zero[0];
+    motor[1] = motor[1] - zero[1];
+
+    set_point[0] = set_point[0] - zero[0];
+    set_point[1] = set_point[1] - zero[1];
+
+    float ballOnMotorK= 
+            ( ball[0]*motor[0] + ball[1] * motor[1] ) / sqrt(pow(motor[0], 2) + pow(motor[1], 2));
+    );
+
+    BallOnLine[0] = ball[0] - (ballOnMotorK * (motor[1])); //This is the projected point on the line that goes between the motor and the center of the 3 motors.
+    BallOnLine[1] = ball[1] + (ballOnMotorK * (motor[0])); //This is the projected point on the line that goes between the motor and the center of the 3 motors.
+
+
+    Vec2f SetpointOnLine;
+     float setpointOnMotorK= 
+            ( set_point[0]*motor[0] + set_point[1] * motor[1] ) / sqrt(pow(motor[0], 2) + pow(motor[1], 2));
+    );
+
+    float setpointOnMotorKx = setpointOnMotorK * motor[0];
+    float setpointOnMotorKy = setpointOnMotorK * motor[1];
+
+    SetpointOnLine[0] = setpoint[0] - (setpointOnMotorKx * (motor[1]));
+    SetpointOnLine[1] = setpoint[1] + (setpointOnMotorKy) * (motor[0]));
+
+    float distanceSetpointCenter = getDistanceTo(center_point, SetpointOnLine);
+    float distanceBallCenter = getDistanceTo(center_point, BallOnLine);
+
+    current_error = distanceSetpointCenter - distanceBallCenter;
+    */
+
+
 }
 
 void PIDController::step(const Vec2i &newBallPos) {
