@@ -132,13 +132,15 @@ public:
         Kp_spinbox->setObjectName(QStringLiteral("Kp_spinbox"));
         Kp_spinbox->setMinimum(-5000);
         Kp_spinbox->setMaximum(5000);
-        Kp_spinbox->setValue(5);
+        Kp_spinbox->setValue(-700);
 
         horizontalLayout_2->addWidget(Kp_spinbox);
 
         Kp_slider = new QSlider(layoutWidget);
         Kp_slider->setObjectName(QStringLiteral("Kp_slider"));
-        Kp_slider->setMaximum(50000);
+        Kp_slider->setMinimum(-5000);
+        Kp_slider->setMaximum(5000);
+        Kp_slider->setValue(-700);
         Kp_slider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_2->addWidget(Kp_slider);
@@ -154,15 +156,17 @@ public:
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
         Ki_spinbox = new QSpinBox(layoutWidget1);
         Ki_spinbox->setObjectName(QStringLiteral("Ki_spinbox"));
-        Ki_spinbox->setMinimum(-5000);
-        Ki_spinbox->setMaximum(5000);
-        Ki_spinbox->setValue(9);
+        Ki_spinbox->setMinimum(-1000);
+        Ki_spinbox->setMaximum(1000);
+        Ki_spinbox->setValue(-10);
 
         horizontalLayout_3->addWidget(Ki_spinbox);
 
         Ki_slider = new QSlider(layoutWidget1);
         Ki_slider->setObjectName(QStringLiteral("Ki_slider"));
-        Ki_slider->setMaximum(50000);
+        Ki_slider->setMinimum(-1000);
+        Ki_slider->setMaximum(1000);
+        Ki_slider->setValue(-10);
         Ki_slider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_3->addWidget(Ki_slider);
@@ -180,13 +184,15 @@ public:
         Kd_spinbox->setObjectName(QStringLiteral("Kd_spinbox"));
         Kd_spinbox->setMinimum(-5000);
         Kd_spinbox->setMaximum(5000);
-        Kd_spinbox->setValue(7);
+        Kd_spinbox->setValue(-550);
 
         horizontalLayout_4->addWidget(Kd_spinbox);
 
         Kd_slider = new QSlider(layoutWidget_2);
         Kd_slider->setObjectName(QStringLiteral("Kd_slider"));
-        Kd_slider->setMaximum(50000);
+        Kd_slider->setMinimum(-5000);
+        Kd_slider->setMaximum(5000);
+        Kd_slider->setValue(-550);
         Kd_slider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_4->addWidget(Kd_slider);

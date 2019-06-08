@@ -17,9 +17,9 @@ mrb_window::mrb_window(QMainWindow *parent, ui_coordinate_popup *coordinate_popu
     connect(coordinate_popup, SIGNAL(image_coordinate(Vec2i)), this, SLOT(processNewCoordinate(Vec2i)));
     connectPIDSliderWithSpinboxes();
     timerId = startTimer(0);
-    motorA.setMotorPos(Vec2i(510, 272));
-    motorB.setMotorPos(Vec2i(160, 414));
-    motorC.setMotorPos(Vec2i(220, 39));
+    motorA.setMotorPos(Vec2i(506, 271));
+    motorB.setMotorPos(Vec2i(164, 400));
+    motorC.setMotorPos(Vec2i(232, 45));
     motorA.updateSetpoint(Vec2i(281, 246));
     motorB.updateSetpoint(Vec2i(281, 246));
     motorC.updateSetpoint(Vec2i(281, 246));

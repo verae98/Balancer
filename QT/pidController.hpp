@@ -24,14 +24,7 @@ class PIDController {
     char name;
 
 public:
-    PIDController(char name) : name(name) {};
-
-    double getAngle(Vec2i origin, Vec2i pointA, Vec2i pointB);
-
-    Vec2i getRotatedCoordinates(const Vec2i &origin, Vec2i point, float angle);
-
-    float getVectorLength(const Vec2i &vector);
-    Vec2i toUnitVector(const Vec2i & vector);
+    explicit PIDController(char name) : name(name) {};
 
     void calculateError(const Vec2i &ballPos);
 
@@ -56,6 +49,7 @@ public:
     Vec2i getSetpoint();
 
     float current_error = 0;
+
     Vec2i center_point = {0, 0};
 };
 

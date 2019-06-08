@@ -8,9 +8,9 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
   Serial.println("start");
-  motor[0] = 90;
-  motor[1] = 90;
-  motor[2] = 90;
+  motor[0] = 110;
+  motor[1] = 110;
+  motor[2] = 110;
   motorA.attach(6);
   motorB.attach(7);
   motorC.attach(8);
