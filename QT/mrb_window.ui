@@ -159,11 +159,14 @@
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QSpinBox" name="Kp_spinbox">
+         <property name="minimum">
+          <number>-5000</number>
+         </property>
          <property name="maximum">
-          <number>50000</number>
+          <number>5000</number>
          </property>
          <property name="value">
-          <number>1000</number>
+          <number>5</number>
          </property>
         </widget>
        </item>
@@ -204,8 +207,14 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QSpinBox" name="Ki_spinbox">
+         <property name="minimum">
+          <number>-5000</number>
+         </property>
          <property name="maximum">
-          <number>50000</number>
+          <number>5000</number>
+         </property>
+         <property name="value">
+          <number>9</number>
          </property>
         </widget>
        </item>
@@ -246,11 +255,14 @@
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QSpinBox" name="Kd_spinbox">
+         <property name="minimum">
+          <number>-5000</number>
+         </property>
          <property name="maximum">
-          <number>50000</number>
+          <number>5000</number>
          </property>
          <property name="value">
-          <number>150</number>
+          <number>7</number>
          </property>
         </widget>
        </item>
@@ -267,6 +279,32 @@
       </layout>
      </widget>
     </widget>
+   </widget>
+   <widget class="QPushButton" name="start_pid">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>430</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stop_pid">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>460</y>
+      <width>80</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

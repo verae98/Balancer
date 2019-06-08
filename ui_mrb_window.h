@@ -60,6 +60,8 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QSpinBox *Kd_spinbox;
     QSlider *Kd_slider;
+    QPushButton *start_pid;
+    QPushButton *stop_pid;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -128,8 +130,9 @@ public:
         horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
         Kp_spinbox = new QSpinBox(layoutWidget);
         Kp_spinbox->setObjectName(QStringLiteral("Kp_spinbox"));
-        Kp_spinbox->setMaximum(50000);
-        Kp_spinbox->setValue(1000);
+        Kp_spinbox->setMinimum(-5000);
+        Kp_spinbox->setMaximum(5000);
+        Kp_spinbox->setValue(5);
 
         horizontalLayout_2->addWidget(Kp_spinbox);
 
@@ -151,7 +154,9 @@ public:
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
         Ki_spinbox = new QSpinBox(layoutWidget1);
         Ki_spinbox->setObjectName(QStringLiteral("Ki_spinbox"));
-        Ki_spinbox->setMaximum(50000);
+        Ki_spinbox->setMinimum(-5000);
+        Ki_spinbox->setMaximum(5000);
+        Ki_spinbox->setValue(9);
 
         horizontalLayout_3->addWidget(Ki_spinbox);
 
@@ -173,8 +178,9 @@ public:
         horizontalLayout_4->setContentsMargins(0, 0, 0, 0);
         Kd_spinbox = new QSpinBox(layoutWidget_2);
         Kd_spinbox->setObjectName(QStringLiteral("Kd_spinbox"));
-        Kd_spinbox->setMaximum(50000);
-        Kd_spinbox->setValue(150);
+        Kd_spinbox->setMinimum(-5000);
+        Kd_spinbox->setMaximum(5000);
+        Kd_spinbox->setValue(7);
 
         horizontalLayout_4->addWidget(Kd_spinbox);
 
@@ -185,6 +191,12 @@ public:
 
         horizontalLayout_4->addWidget(Kd_slider);
 
+        start_pid = new QPushButton(centralwidget);
+        start_pid->setObjectName(QStringLiteral("start_pid"));
+        start_pid->setGeometry(QRect(360, 430, 80, 25));
+        stop_pid = new QPushButton(centralwidget);
+        stop_pid->setObjectName(QStringLiteral("stop_pid"));
+        stop_pid->setGeometry(QRect(360, 460, 80, 25));
         MainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QStringLiteral("statusbar"));
@@ -211,6 +223,8 @@ public:
         groupBox_5->setTitle(QApplication::translate("MainWindow", "Kp", nullptr));
         groupBox_6->setTitle(QApplication::translate("MainWindow", "Ki", nullptr));
         groupBox_7->setTitle(QApplication::translate("MainWindow", "Kd", nullptr));
+        start_pid->setText(QApplication::translate("MainWindow", "Start", nullptr));
+        stop_pid->setText(QApplication::translate("MainWindow", "Stop", nullptr));
     } // retranslateUi
 
 };

@@ -5,7 +5,7 @@
 #include "ui_mrb_window.hpp"
 
 mrb_window::mrb_window(QMainWindow *parent, ui_coordinate_popup *coordinate_popup, serial::Serial *due)
-        : QMainWindow(parent), popup_window(coordinate_popup), due(due) {
+        : QMainWindow(parent), popup_window(coordinate_popup), due(due), motorA('A'), motorB('B'), motorC('C') {
     ui.setupUi(this);
     int connected_camera_count = countCameras();
     QStringList cameras;
@@ -17,6 +17,17 @@ mrb_window::mrb_window(QMainWindow *parent, ui_coordinate_popup *coordinate_popu
     connect(coordinate_popup, SIGNAL(image_coordinate(Vec2i)), this, SLOT(processNewCoordinate(Vec2i)));
     connectPIDSliderWithSpinboxes();
     timerId = startTimer(0);
+    motorA.setMotorPos(Vec2i(510, 272));
+    motorB.setMotorPos(Vec2i(160, 414));
+    motorC.setMotorPos(Vec2i(220, 39));
+    motorA.updateSetpoint(Vec2i(281, 246));
+    motorB.updateSetpoint(Vec2i(281, 246));
+    motorC.updateSetpoint(Vec2i(281, 246));
+    Vec2i center = (motorA.getMotorPos() + motorB.getMotorPos() + motorC.getMotorPos()) / 3;
+    motorA.center_point = center;
+    motorB.center_point = center;
+    motorC.center_point = center;
+    updatePIDControllers(0);
 }
 
 void mrb_window::on_load_stream_btn_clicked() {
@@ -85,37 +96,55 @@ void mrb_window::timerEvent(QTimerEvent *event) {
             }
         }
 
-        if ((max - min) < 30 && min > 100) {
+        if ((max - min) < 40 && min > 70) {
             Vec2i ball_pos;
             ball_pos[0] = center.x;
             ball_pos[1] = center.y;
             motorA.step(ball_pos);
             motorB.step(ball_pos);
             motorC.step(ball_pos);
-
-            std::string action;
-            action += std::to_string((int) motorA.getMappedPIDAction());
-            action += ";";
-            action += std::to_string((int) motorB.getMappedPIDAction());
-            action += ";";
-            action += std::to_string((int) motorC.getMappedPIDAction());
-            action += ";\n";
-            if (test % 10 == 0) {
-                if(due->isOpen()) {
-                    due->write(action);
-                }else{
-                    due->open();
-                    due->write(action);
+            if (running) {
+                std::string temp_action;
+                std::string action;
+                temp_action = std::to_string((int) motorA.getMappedPIDAction());
+                while(temp_action.length() < 3) {
+                    temp_action = "0" + temp_action;
                 }
-                std::cout << action << std::endl;
-                test = 0;
-            }
-            test++;
+                action += temp_action;
+                action += ";";
+                temp_action = std::to_string((int) motorB.getMappedPIDAction());
+                while(temp_action.length() < 3) {
+                    temp_action = "0" + temp_action;
+                }
+                action += temp_action;
+                action += ";";
+                temp_action = std::to_string((int) motorC.getMappedPIDAction());
+                while(temp_action.length() < 3) {
+                    temp_action = "0" + temp_action;
+                }
+                action += temp_action;
+                action += ";\n";
+//                if (test % 10 == 0) {
+                    if (due->isOpen()) {
+                        due->write(action);
+                    } else {
+                        due->open();
+                        due->write(action);
+                    }
+                    std::cout << "Current Error A = " << std::to_string(motorA.current_error) << std::endl;
+                    std::cout << "Current Error B = " << std::to_string(motorB.current_error) << std::endl;
+                    std::cout << "Current Error C = " << std::to_string(motorC.current_error) << std::endl;
 
-            action = "";
-            if(due->available()) {
-                std::string rec = due->readline();
-                std::cout << rec << std::endl;
+                    std::cout << action << std::endl;
+//                    test = 0;
+//                }
+//                test++;
+
+                action = "";
+                if (due->available()) {
+                    std::string rec = due->readline();
+                    std::cout << rec << std::endl;
+                }
             }
             circle(frame, center, radius, (255, 30, 255), 3, LINE_AA);
             break;
@@ -123,7 +152,7 @@ void mrb_window::timerEvent(QTimerEvent *event) {
     }
 
     auto motor_color = Scalar(66, 244, 78);
-    auto setpoint_color = Scalar(66, 66 ,244);
+    auto setpoint_color = Scalar(66, 66, 244);
     circle(frame, motorA.getMotorPos(), 5, motor_color, 5, LINE_AA);
     circle(frame, motorB.getMotorPos(), 5, motor_color, 5, LINE_AA);
     circle(frame, motorC.getMotorPos(), 5, motor_color, 5, LINE_AA);
@@ -231,6 +260,11 @@ void mrb_window::processNewCoordinate(Vec2i newCoordinate) {
         motorC.updateSetpoint(newCoordinate);
         std::cout << "Setpoint Updated" << std::endl;
     }
+
+    Vec2i center = (motorA.getMotorPos() + motorB.getMotorPos() + motorC.getMotorPos()) / 3;
+    motorA.center_point = center;
+    motorB.center_point = center;
+    motorC.center_point = center;
 }
 
 void mrb_window::connectPIDSliderWithSpinboxes() {
@@ -249,13 +283,21 @@ void mrb_window::connectPIDSliderWithSpinboxes() {
 }
 
 void mrb_window::updatePIDControllers(int val) {
-    float P = ui.Kp_spinbox->value() / 1000;
-    float I = ui.Ki_spinbox->value() / 1000;
-    float D = ui.Kd_spinbox->value() / 1000;
+    float P = ui.Kp_spinbox->value();
+    float I = ui.Ki_spinbox->value();
+    float D = ui.Kd_spinbox->value();
 
     motorA.setWeights(P, I, D);
     motorB.setWeights(P, I, D);
     motorC.setWeights(P, I, D);
+}
+
+void mrb_window::on_stop_pid_clicked() {
+    running = false;
+}
+
+void mrb_window::on_start_pid_clicked() {
+    running = true;
 }
 
 

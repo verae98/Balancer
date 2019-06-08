@@ -31,6 +31,8 @@ private slots:
     void on_setpoint_selector_btn_clicked();
     void processNewCoordinate(Vec2i newCoordinate);
     void updatePIDControllers(int val);
+    void on_start_pid_clicked();
+    void on_stop_pid_clicked();
 protected:
     void timerEvent(QTimerEvent *event);
 private:
@@ -45,6 +47,7 @@ private:
     ui_coordinate_popup * popup_window;
     std::string current_target;
     serial::Serial * due;
+    bool running = false;
     int countCameras();
     void getClickedPointOnImage();
     void connectPIDSliderWithSpinboxes();
