@@ -16,10 +16,11 @@ mrb_window::mrb_window(QMainWindow *parent, ui_coordinate_popup *coordinate_popu
     ui.load_stream_capture_list->addItems(cameras);
     connect(coordinate_popup, SIGNAL(image_coordinate(Vec2i)), this, SLOT(processNewCoordinate(Vec2i)));
     connectPIDSliderWithSpinboxes();
+    connectHSVSliderWithSpinboxes();
     timerId = startTimer(0);
-    motorA.setMotorPos(Vec2i(506, 271));
-    motorB.setMotorPos(Vec2i(164, 400));
-    motorC.setMotorPos(Vec2i(232, 45));
+    motorA.setMotorPos(Vec2i(495, 299));
+    motorB.setMotorPos(Vec2i(158, 370));
+    motorC.setMotorPos(Vec2i(272, 50));
     motorA.updateSetpoint(Vec2i(281, 246));
     motorB.updateSetpoint(Vec2i(281, 246));
     motorC.updateSetpoint(Vec2i(281, 246));
@@ -28,6 +29,7 @@ mrb_window::mrb_window(QMainWindow *parent, ui_coordinate_popup *coordinate_popu
     motorB.center_point = center;
     motorC.center_point = center;
     updatePIDControllers(0);
+    updateHSV(0);
 }
 
 void mrb_window::on_load_stream_btn_clicked() {
@@ -61,94 +63,110 @@ void mrb_window::timerEvent(QTimerEvent *event) {
     Mat frame;
     stream >> frame;
     Mat dest;
+    Mat hsv_image;
     cvtColor(frame, dest, COLOR_BGR2RGB);
+    cvtColor(frame, hsv_image, COLOR_BGR2HSV);
     Mat gray;
     cvtColor(frame, gray, COLOR_BGR2GRAY);
 
     medianBlur(gray, gray, 5);
     std::vector<Vec3f> circles;
-    HoughCircles(gray, circles, HOUGH_GRADIENT, 1,
-                 20,             // change this value to detect circles with
-            // different distances to each other
-                 100, 30, 20, 50 // change the last two parameters
-            // (min_radius & max_radius) to detect larger circles
-    );
+
+
+    Mat red_hue_image;
+    inRange(hsv_image, Scalar(lower_H, lower_S, lower_V), Scalar(upper_H, upper_S, upper_V), red_hue_image);
+    GaussianBlur(red_hue_image, red_hue_image, Size(3, 3), 3);
+    erode(red_hue_image, red_hue_image, Mat(), Point(-1, -1), 13);
+    dilate(red_hue_image, red_hue_image, Mat(), Point(-1, -1), 13);
+
+    SimpleBlobDetector::Params blob_params;
+
+    // Set params for binary image
+    blob_params.filterByColor = false;
+    blob_params.blobColor = 255; //blobs are white
+    blob_params.minThreshold = 127;
+    blob_params.thresholdStep = 1;
+    blob_params.maxThreshold = blob_params.minThreshold + blob_params.thresholdStep;
+    blob_params.minRepeatability = 1;
+    // other parameters
+    blob_params.filterByInertia = false;
+    blob_params.filterByConvexity = false;
+    blob_params.filterByCircularity = false;
+    blob_params.filterByArea = true;
+    blob_params.minArea = 3.14159 * 10.0f * 10.0f; // Min 10.0f diameter
+    blob_params.maxArea = 3.14159 * 40.0f * 40.0f; // Max 20.0f diameter
+
+
+    //detects blobs
+    auto detector = SimpleBlobDetector::create(blob_params);
+    std::vector<cv::KeyPoint> keypoints;
+    detector->detect(red_hue_image, keypoints);
+
+
+    drawKeypoints(frame, keypoints, frame, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+
+
+    //HoughCircles(red_hue_image, circles, HOUGH_GRADIENT, 1, 200, 120, 17, 0, 0);
+
     Mat final_output(frame.rows, frame.cols, CV_8UC1);
-    for (size_t i = 0; i < circles.size(); i++) {
+    for (size_t i = 0; i < keypoints.size(); i++) {
 
-        Vec3f c = circles[i];
-        Point center = Point(c[0], c[1]);
-        int radius = c[2];
+        Point center = keypoints[i].pt;
+        int radius = keypoints[i].size / 2;
 
-        // std::cout << center << std::endl;
-        Vec3b intensity = frame.at<Vec3b>(center.y, center.x);
-        // std::cout << (int)intensity[2] << " " << (int)intensity[1] << " "
-        //           << (int)intensity[0] << "\n";
-        int min = 255;
-        int max = 0;
-
-        for (int i = 0; i < 2; i++) {
-            if (intensity[i] < min) {
-                min = intensity[i];
+        Vec2i ball_pos;
+        ball_pos[0] = center.x;
+        ball_pos[1] = center.y - radius * 0.8;
+        motorA.step(ball_pos);
+        motorB.step(ball_pos);
+        motorC.step(ball_pos);
+        if (running) {
+            std::string temp_action;
+            std::string action;
+            temp_action = std::to_string((int) motorA.getMappedPIDAction());
+            while (temp_action.length() < 3) {
+                temp_action = "0" + temp_action;
             }
-            if (intensity[i] > max) {
-                max = intensity[i];
+            action += temp_action;
+            action += ";";
+            temp_action = std::to_string((int) motorB.getMappedPIDAction());
+            while (temp_action.length() < 3) {
+                temp_action = "0" + temp_action;
             }
-        }
-
-        if ((max - min) < 40 && min > 70) {
-            Vec2i ball_pos;
-            ball_pos[0] = center.x;
-            ball_pos[1] = center.y;
-            motorA.step(ball_pos);
-            motorB.step(ball_pos);
-            motorC.step(ball_pos);
-            if (running) {
-                std::string temp_action;
-                std::string action;
-                temp_action = std::to_string((int) motorA.getMappedPIDAction());
-                while(temp_action.length() < 3) {
-                    temp_action = "0" + temp_action;
-                }
-                action += temp_action;
-                action += ";";
-                temp_action = std::to_string((int) motorB.getMappedPIDAction());
-                while(temp_action.length() < 3) {
-                    temp_action = "0" + temp_action;
-                }
-                action += temp_action;
-                action += ";";
-                temp_action = std::to_string((int) motorC.getMappedPIDAction());
-                while(temp_action.length() < 3) {
-                    temp_action = "0" + temp_action;
-                }
-                action += temp_action;
-                action += ";\n";
+            action += temp_action;
+            action += ";";
+            temp_action = std::to_string((int) motorC.getMappedPIDAction());
+            while (temp_action.length() < 3) {
+                temp_action = "0" + temp_action;
+            }
+            action += temp_action;
+            action += ";\n";
 //                if (test % 10 == 0) {
-                    if (due->isOpen()) {
-                        due->write(action);
-                    } else {
-                        due->open();
-                        due->write(action);
-                    }
-                    std::cout << "Current Error A = " << std::to_string(motorA.current_error) << std::endl;
-                    std::cout << "Current Error B = " << std::to_string(motorB.current_error) << std::endl;
-                    std::cout << "Current Error C = " << std::to_string(motorC.current_error) << std::endl;
+            if (due->isOpen()) {
+                due->write(action);
+            } else {
+                due->open();
+                due->write(action);
+            }
+            std::cout << "Current Error A = " << std::to_string(motorA.current_error) << std::endl;
+            std::cout << "Current Error B = " << std::to_string(motorB.current_error) << std::endl;
+            std::cout << "Current Error C = " << std::to_string(motorC.current_error) << std::endl;
 
-                    std::cout << action << std::endl;
+            std::cout << action << std::endl;
 //                    test = 0;
 //                }
 //                test++;
 
-                action = "";
-                if (due->available()) {
-                    std::string rec = due->readline();
-                    std::cout << rec << std::endl;
-                }
+            action = "";
+            if (due->available()) {
+                std::string rec = due->readline();
+                std::cout << rec << std::endl;
             }
-            circle(frame, center, radius, (255, 30, 255), 3, LINE_AA);
-            break;
+//            break;
         }
+        std::vector<cv::KeyPoint> keypoints1 = {keypoints[0]};
+        drawKeypoints(frame, keypoints1, frame, Scalar(255, 0, 0), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
+        break;
     }
 
     auto motor_color = Scalar(66, 244, 78);
@@ -165,13 +183,15 @@ void mrb_window::timerEvent(QTimerEvent *event) {
     putText(frame, "S", motorC.getSetpoint() + Vec2i(10, -4), font, 1, setpoint_color, 2, LINE_AA);
 
 
-    // Draw the image to the QT Label
     cvtColor(frame, dest, CV_BGR2RGB);
-    QImage image1 = QImage((uchar *) dest.data, dest.cols, dest.rows, dest.step, QImage::Format_RGB888);
-    ui.camera_stream->setPixmap(QPixmap::fromImage(image1));
+
+    QImage image = QImage((uchar *) dest.data, dest.cols, dest.rows, dest.step, QImage::Format_RGB888);
+    QImage image1 = QImage((uchar *) red_hue_image.data, red_hue_image.cols, red_hue_image.rows, red_hue_image.step,
+                           QImage::Format_Grayscale8);
+    ui.camera_stream->setPixmap(QPixmap::fromImage(image));
     ui.camera_stream->show();
-
-
+    ui.camera_stream_2->setPixmap(QPixmap::fromImage(image1));
+    ui.camera_stream->show();
 }
 
 int mrb_window::countCameras() {
@@ -281,6 +301,46 @@ void mrb_window::connectPIDSliderWithSpinboxes() {
     connect(ui.Kd_spinbox, SIGNAL(valueChanged(int)), this, SLOT(updatePIDControllers(int)));
     connect(ui.Ki_spinbox, SIGNAL(valueChanged(int)), this, SLOT(updatePIDControllers(int)));
 }
+
+
+void mrb_window::connectHSVSliderWithSpinboxes() {
+    connect(ui.upper_S_spinbox, SIGNAL(valueChanged(int)), ui.upper_S_slider, SLOT(setValue(int)));
+    connect(ui.upper_S_slider, SIGNAL(valueChanged(int)), ui.upper_S_spinbox, SLOT(setValue(int)));
+
+    connect(ui.upper_H_spinbox, SIGNAL(valueChanged(int)), ui.upper_H_slider, SLOT(setValue(int)));
+    connect(ui.upper_H_slider, SIGNAL(valueChanged(int)), ui.upper_H_spinbox, SLOT(setValue(int)));
+
+    connect(ui.upper_V_spinbox, SIGNAL(valueChanged(int)), ui.upper_V_slider, SLOT(setValue(int)));
+    connect(ui.upper_V_slider, SIGNAL(valueChanged(int)), ui.upper_V_spinbox, SLOT(setValue(int)));
+
+    connect(ui.upper_H_spinbox, SIGNAL(valueChanged(int)), this, SLOT(updateHSV(int)));
+    connect(ui.upper_S_spinbox, SIGNAL(valueChanged(int)), this, SLOT(updateHSV(int)));
+    connect(ui.upper_V_spinbox, SIGNAL(valueChanged(int)), this, SLOT(updateHSV(int)));
+
+    connect(ui.lower_S_spinbox, SIGNAL(valueChanged(int)), ui.lower_S_slider, SLOT(setValue(int)));
+    connect(ui.lower_S_slider, SIGNAL(valueChanged(int)), ui.lower_S_spinbox, SLOT(setValue(int)));
+
+    connect(ui.lower_H_spinbox, SIGNAL(valueChanged(int)), ui.lower_H_slider, SLOT(setValue(int)));
+    connect(ui.lower_H_slider, SIGNAL(valueChanged(int)), ui.lower_H_spinbox, SLOT(setValue(int)));
+
+    connect(ui.lower_V_spinbox, SIGNAL(valueChanged(int)), ui.lower_V_slider, SLOT(setValue(int)));
+    connect(ui.lower_V_slider, SIGNAL(valueChanged(int)), ui.lower_V_spinbox, SLOT(setValue(int)));
+
+    connect(ui.lower_H_spinbox, SIGNAL(valueChanged(int)), this, SLOT(updateHSV(int)));
+    connect(ui.lower_S_spinbox, SIGNAL(valueChanged(int)), this, SLOT(updateHSV(int)));
+    connect(ui.lower_V_spinbox, SIGNAL(valueChanged(int)), this, SLOT(updateHSV(int)));
+}
+
+void mrb_window::updateHSV(int val) {
+    upper_H = ui.upper_H_spinbox->value();
+    upper_S = ui.upper_S_spinbox->value();
+    upper_V = ui.upper_V_spinbox->value();
+
+    lower_H = ui.lower_H_spinbox->value();
+    lower_S = ui.lower_S_spinbox->value();
+    lower_V = ui.lower_V_spinbox->value();
+}
+
 
 void mrb_window::updatePIDControllers(int val) {
     float P = ui.Kp_spinbox->value();

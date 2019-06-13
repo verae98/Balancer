@@ -13,6 +13,7 @@
 #include "pidController.hpp"
 #include "ui_CoordinatePopup.hpp"
 #include <serial/serial.h>
+#include <opencv2/features2d.hpp>
 
 using namespace cv;
 
@@ -31,6 +32,8 @@ private slots:
     void on_setpoint_selector_btn_clicked();
     void processNewCoordinate(Vec2i newCoordinate);
     void updatePIDControllers(int val);
+
+    void updateHSV(int val);
     void on_start_pid_clicked();
     void on_stop_pid_clicked();
 protected:
@@ -47,10 +50,22 @@ private:
     ui_coordinate_popup * popup_window;
     std::string current_target;
     serial::Serial * due;
+
+    int upper_H = 0;
+    int upper_S = 0;
+    int upper_V = 0;
+
+    int lower_H = 0;
+    int lower_S = 0;
+    int lower_V = 0;
+
     bool running = false;
     int countCameras();
     void getClickedPointOnImage();
     void connectPIDSliderWithSpinboxes();
+
+    void connectHSVSliderWithSpinboxes();
+
 };
 
 

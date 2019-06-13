@@ -18,6 +18,7 @@ void PIDController::calculateError(const Vec2i &ballPos) {
     auto motor = motor_pos;
     auto ball = ballPos;
     auto set_point = setpoint;
+
     Vec2f BallOnLine;
     ball[0] = ball[0] - zero[0];
     ball[1] = ball[1] - zero[1];
@@ -39,6 +40,8 @@ void PIDController::calculateError(const Vec2i &ballPos) {
     float distanceSetpointCenter = getDistanceTo(motor, SetpointOnLine);
     float distanceBallCenter = getDistanceTo(motor, BallOnLine);
     current_error = distanceSetpointCenter - distanceBallCenter;
+    //if(current_error > 0 && current_error < 20){current_error = 0;}
+    //if(current_error < 0 && current_error > -20){current_error = 0;}
 }
 
 void PIDController::step(const Vec2i &newBallPos) {

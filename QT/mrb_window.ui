@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1123</width>
-    <height>525</height>
+       <width>1576</width>
+       <height>1021</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -166,7 +166,7 @@
           <number>5000</number>
          </property>
          <property name="value">
-          <number>-1000</number>
+             <number>-527</number>
          </property>
         </widget>
        </item>
@@ -179,7 +179,7 @@
           <number>5000</number>
          </property>
          <property name="value">
-          <number>-1000</number>
+             <number>-527</number>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -220,7 +220,7 @@
           <number>1000</number>
          </property>
          <property name="value">
-          <number>-20</number>
+             <number>-118</number>
          </property>
         </widget>
        </item>
@@ -233,7 +233,7 @@
           <number>1000</number>
          </property>
          <property name="value">
-          <number>-20</number>
+             <number>-118</number>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -274,7 +274,7 @@
           <number>5000</number>
          </property>
          <property name="value">
-          <number>-750</number>
+             <number>-548</number>
          </property>
         </widget>
        </item>
@@ -287,10 +287,10 @@
           <number>5000</number>
          </property>
          <property name="value">
-          <number>-750</number>
+             <number>-548</number>
          </property>
          <property name="sliderPosition">
-          <number>-750</number>
+             <number>-548</number>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -327,6 +327,388 @@
      <string>Stop</string>
     </property>
    </widget>
+      <widget class="QGroupBox" name="groupBox_8">
+          <property name="geometry">
+              <rect>
+                  <x>1140</x>
+                  <y>30</y>
+                  <width>431</width>
+                  <height>281</height>
+              </rect>
+          </property>
+          <property name="title">
+              <string>Edit lower HSV values:</string>
+          </property>
+          <widget class="QGroupBox" name="groupBox_9">
+              <property name="geometry">
+                  <rect>
+                      <x>10</x>
+                      <y>30</y>
+                      <width>411</width>
+                      <height>71</height>
+                  </rect>
+              </property>
+              <property name="title">
+                  <string>H</string>
+              </property>
+              <widget class="QWidget" name="layoutWidget_3">
+                  <property name="geometry">
+                      <rect>
+                          <x>10</x>
+                          <y>30</y>
+                          <width>381</width>
+                          <height>28</height>
+                      </rect>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_5">
+                      <item>
+                          <widget class="QSpinBox" name="lower_H_spinbox">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>60</number>
+                              </property>
+                          </widget>
+                      </item>
+                      <item>
+                          <widget class="QSlider" name="lower_H_slider">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>60</number>
+                              </property>
+                              <property name="orientation">
+                                  <enum>Qt::Horizontal</enum>
+                              </property>
+                          </widget>
+                      </item>
+                  </layout>
+              </widget>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_10">
+              <property name="geometry">
+                  <rect>
+                      <x>10</x>
+                      <y>110</y>
+                      <width>411</width>
+                      <height>71</height>
+                  </rect>
+              </property>
+              <property name="title">
+                  <string>S</string>
+              </property>
+              <widget class="QWidget" name="layoutWidget_4">
+                  <property name="geometry">
+                      <rect>
+                          <x>10</x>
+                          <y>30</y>
+                          <width>381</width>
+                          <height>28</height>
+                      </rect>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                      <item>
+                          <widget class="QSpinBox" name="lower_S_spinbox">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>45</number>
+                              </property>
+                          </widget>
+                      </item>
+                      <item>
+                          <widget class="QSlider" name="lower_S_slider">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>0</number>
+                              </property>
+                              <property name="orientation">
+                                  <enum>Qt::Horizontal</enum>
+                              </property>
+                          </widget>
+                      </item>
+                  </layout>
+              </widget>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_11">
+              <property name="geometry">
+                  <rect>
+                      <x>10</x>
+                      <y>190</y>
+                      <width>411</width>
+                      <height>71</height>
+                  </rect>
+              </property>
+              <property name="title">
+                  <string>V</string>
+              </property>
+              <widget class="QWidget" name="layoutWidget_5">
+                  <property name="geometry">
+                      <rect>
+                          <x>10</x>
+                          <y>30</y>
+                          <width>381</width>
+                          <height>28</height>
+                      </rect>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_7">
+                      <item>
+                          <widget class="QSpinBox" name="lower_V_spinbox">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>0</number>
+                              </property>
+                          </widget>
+                      </item>
+                      <item>
+                          <widget class="QSlider" name="lower_V_slider">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>0</number>
+                              </property>
+                              <property name="sliderPosition">
+                                  <number>0</number>
+                              </property>
+                              <property name="orientation">
+                                  <enum>Qt::Horizontal</enum>
+                              </property>
+                          </widget>
+                      </item>
+                  </layout>
+              </widget>
+          </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_12">
+          <property name="geometry">
+              <rect>
+                  <x>1140</x>
+                  <y>320</y>
+                  <width>431</width>
+                  <height>281</height>
+              </rect>
+          </property>
+          <property name="title">
+              <string>Edit upper HSV values:</string>
+          </property>
+          <widget class="QGroupBox" name="groupBox_13">
+              <property name="geometry">
+                  <rect>
+                      <x>10</x>
+                      <y>30</y>
+                      <width>411</width>
+                      <height>71</height>
+                  </rect>
+              </property>
+              <property name="title">
+                  <string>H</string>
+              </property>
+              <widget class="QWidget" name="layoutWidget_6">
+                  <property name="geometry">
+                      <rect>
+                          <x>10</x>
+                          <y>30</y>
+                          <width>381</width>
+                          <height>28</height>
+                      </rect>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_8">
+                      <item>
+                          <widget class="QSpinBox" name="upper_H_spinbox">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>84</number>
+                              </property>
+                          </widget>
+                      </item>
+                      <item>
+                          <widget class="QSlider" name="upper_H_slider">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>84</number>
+                              </property>
+                              <property name="orientation">
+                                  <enum>Qt::Horizontal</enum>
+                              </property>
+                          </widget>
+                      </item>
+                  </layout>
+              </widget>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_14">
+              <property name="geometry">
+                  <rect>
+                      <x>10</x>
+                      <y>110</y>
+                      <width>411</width>
+                      <height>71</height>
+                  </rect>
+              </property>
+              <property name="title">
+                  <string>S</string>
+              </property>
+              <widget class="QWidget" name="layoutWidget_7">
+                  <property name="geometry">
+                      <rect>
+                          <x>10</x>
+                          <y>30</y>
+                          <width>381</width>
+                          <height>28</height>
+                      </rect>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_9">
+                      <item>
+                          <widget class="QSpinBox" name="upper_S_spinbox">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>255</number>
+                              </property>
+                          </widget>
+                      </item>
+                      <item>
+                          <widget class="QSlider" name="upper_S_slider">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>255</number>
+                              </property>
+                              <property name="orientation">
+                                  <enum>Qt::Horizontal</enum>
+                              </property>
+                          </widget>
+                      </item>
+                  </layout>
+              </widget>
+          </widget>
+          <widget class="QGroupBox" name="groupBox_15">
+              <property name="geometry">
+                  <rect>
+                      <x>10</x>
+                      <y>190</y>
+                      <width>411</width>
+                      <height>71</height>
+                  </rect>
+              </property>
+              <property name="title">
+                  <string>V</string>
+              </property>
+              <widget class="QWidget" name="layoutWidget_8">
+                  <property name="geometry">
+                      <rect>
+                          <x>10</x>
+                          <y>30</y>
+                          <width>381</width>
+                          <height>28</height>
+                      </rect>
+                  </property>
+                  <layout class="QHBoxLayout" name="horizontalLayout_10">
+                      <item>
+                          <widget class="QSpinBox" name="upper_V_spinbox">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>255</number>
+                              </property>
+                          </widget>
+                      </item>
+                      <item>
+                          <widget class="QSlider" name="upper_V_slider">
+                              <property name="minimum">
+                                  <number>0</number>
+                              </property>
+                              <property name="maximum">
+                                  <number>255</number>
+                              </property>
+                              <property name="value">
+                                  <number>255</number>
+                              </property>
+                              <property name="sliderPosition">
+                                  <number>255</number>
+                              </property>
+                              <property name="orientation">
+                                  <enum>Qt::Horizontal</enum>
+                              </property>
+                          </widget>
+                      </item>
+                  </layout>
+              </widget>
+          </widget>
+      </widget>
+      <widget class="QGroupBox" name="groupBox_16">
+          <property name="geometry">
+              <rect>
+                  <x>470</x>
+                  <y>510</y>
+                  <width>631</width>
+                  <height>481</height>
+              </rect>
+          </property>
+          <property name="title">
+              <string>HSV Stream</string>
+          </property>
+          <widget class="QLabel" name="camera_stream_2">
+              <property name="geometry">
+                  <rect>
+                      <x>0</x>
+                      <y>20</y>
+                      <width>611</width>
+                      <height>451</height>
+                  </rect>
+              </property>
+              <property name="text">
+                  <string/>
+              </property>
+          </widget>
+      </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
