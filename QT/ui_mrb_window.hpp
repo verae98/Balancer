@@ -30,6 +30,14 @@ public:
     explicit mrb_window(QMainWindow *parent = nullptr, ui_coordinate_popup *coordinate_popup = nullptr,
                         serial::Serial *due = nullptr);
 
+    /**
+     * Eventfilter to capture mouse clicks on the camera stream to update the setpoint.
+     * @param obj
+     * @param event
+     * @return
+     */
+    bool eventFilter(QObject *obj, QEvent *event) override;
+
 /**
  * This is some preprocessor macro magic from QT to find the event handlers for it's events.
  */

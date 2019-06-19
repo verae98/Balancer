@@ -253,7 +253,7 @@ public:
         lower_H_spinbox = new QSpinBox(layoutWidget_3);
         lower_H_spinbox->setObjectName(QStringLiteral("lower_H_spinbox"));
         lower_H_spinbox->setMinimum(0);
-        lower_H_spinbox->setMaximum(255);
+        lower_H_spinbox->setMaximum(179);
         lower_H_spinbox->setValue(60);
 
         horizontalLayout_5->addWidget(lower_H_spinbox);
@@ -261,7 +261,7 @@ public:
         lower_H_slider = new QSlider(layoutWidget_3);
         lower_H_slider->setObjectName(QStringLiteral("lower_H_slider"));
         lower_H_slider->setMinimum(0);
-        lower_H_slider->setMaximum(255);
+        lower_H_slider->setMaximum(179);
         lower_H_slider->setValue(60);
         lower_H_slider->setOrientation(Qt::Horizontal);
 
@@ -335,7 +335,7 @@ public:
         upper_H_spinbox = new QSpinBox(layoutWidget_6);
         upper_H_spinbox->setObjectName(QStringLiteral("upper_H_spinbox"));
         upper_H_spinbox->setMinimum(0);
-        upper_H_spinbox->setMaximum(255);
+        upper_H_spinbox->setMaximum(179);
         upper_H_spinbox->setValue(90);
 
         horizontalLayout_8->addWidget(upper_H_spinbox);
@@ -343,7 +343,7 @@ public:
         upper_H_slider = new QSlider(layoutWidget_6);
         upper_H_slider->setObjectName(QStringLiteral("upper_H_slider"));
         upper_H_slider->setMinimum(0);
-        upper_H_slider->setMaximum(255);
+        upper_H_slider->setMaximum(179);
         upper_H_slider->setValue(84);
         upper_H_slider->setOrientation(Qt::Horizontal);
 

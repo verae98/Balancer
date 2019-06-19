@@ -30,6 +30,8 @@ mrb_window::mrb_window(QMainWindow *parent, ui_coordinate_popup *coordinate_popu
     motorC.center_point = center;
     updatePIDControllers(0);
     updateHSV(0);
+    ui.camera_stream->setMouseTracking(true);
+    ui.camera_stream->installEventFilter(this);
 }
 
 void mrb_window::on_load_stream_btn_clicked() {
@@ -116,7 +118,7 @@ void mrb_window::timerEvent(QTimerEvent *event) {
 
         Vec2i ball_pos;
         ball_pos[0] = center.x;
-        ball_pos[1] = center.y - radius * 0.8;
+        ball_pos[1] = center.y - radius;
         motorA.step(ball_pos);
         motorB.step(ball_pos);
         motorC.step(ball_pos);
@@ -358,6 +360,15 @@ void mrb_window::on_stop_pid_clicked() {
 
 void mrb_window::on_start_pid_clicked() {
     running = true;
+}
+
+bool mrb_window::eventFilter(QObject *obj, QEvent *event) {
+    if (qobject_cast<QLabel *>(obj) == ui.camera_stream && event->type() == QEvent::MouseButtonRelease) {
+        current_target = "Setpoint";
+        auto *mouseEvent = static_cast<QMouseEvent *>(event);
+        processNewCoordinate(Vec2i(mouseEvent->x(), mouseEvent->y()));
+    }
+    return false;
 }
 
 
