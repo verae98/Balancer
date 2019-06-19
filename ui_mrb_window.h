@@ -166,7 +166,7 @@ public:
         Kp_spinbox->setObjectName(QStringLiteral("Kp_spinbox"));
         Kp_spinbox->setMinimum(-5000);
         Kp_spinbox->setMaximum(5000);
-        Kp_spinbox->setValue(-1009);
+        Kp_spinbox->setValue(-527);
 
         horizontalLayout_2->addWidget(Kp_spinbox);
 
@@ -174,7 +174,7 @@ public:
         Kp_slider->setObjectName(QStringLiteral("Kp_slider"));
         Kp_slider->setMinimum(-5000);
         Kp_slider->setMaximum(5000);
-        Kp_slider->setValue(-1009);
+        Kp_slider->setValue(-527);
         Kp_slider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_2->addWidget(Kp_slider);
@@ -192,7 +192,7 @@ public:
         Ki_spinbox->setObjectName(QStringLiteral("Ki_spinbox"));
         Ki_spinbox->setMinimum(-1000);
         Ki_spinbox->setMaximum(1000);
-        Ki_spinbox->setValue(-67);
+        Ki_spinbox->setValue(-118);
 
         horizontalLayout_3->addWidget(Ki_spinbox);
 
@@ -200,7 +200,7 @@ public:
         Ki_slider->setObjectName(QStringLiteral("Ki_slider"));
         Ki_slider->setMinimum(-1000);
         Ki_slider->setMaximum(1000);
-        Ki_slider->setValue(-67);
+        Ki_slider->setValue(-118);
         Ki_slider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_3->addWidget(Ki_slider);
@@ -218,7 +218,7 @@ public:
         Kd_spinbox->setObjectName(QStringLiteral("Kd_spinbox"));
         Kd_spinbox->setMinimum(-5000);
         Kd_spinbox->setMaximum(5000);
-        Kd_spinbox->setValue(-537);
+        Kd_spinbox->setValue(-548);
 
         horizontalLayout_4->addWidget(Kd_spinbox);
 
@@ -226,8 +226,8 @@ public:
         Kd_slider->setObjectName(QStringLiteral("Kd_slider"));
         Kd_slider->setMinimum(-5000);
         Kd_slider->setMaximum(5000);
-        Kd_slider->setValue(-537);
-        Kd_slider->setSliderPosition(-537);
+        Kd_slider->setValue(-548);
+        Kd_slider->setSliderPosition(-548);
         Kd_slider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_4->addWidget(Kd_slider);
@@ -254,7 +254,7 @@ public:
         lower_H_spinbox->setObjectName(QStringLiteral("lower_H_spinbox"));
         lower_H_spinbox->setMinimum(0);
         lower_H_spinbox->setMaximum(255);
-        lower_H_spinbox->setValue(0);
+        lower_H_spinbox->setValue(60);
 
         horizontalLayout_5->addWidget(lower_H_spinbox);
 
@@ -262,7 +262,7 @@ public:
         lower_H_slider->setObjectName(QStringLiteral("lower_H_slider"));
         lower_H_slider->setMinimum(0);
         lower_H_slider->setMaximum(255);
-        lower_H_slider->setValue(20);
+        lower_H_slider->setValue(60);
         lower_H_slider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_5->addWidget(lower_H_slider);
@@ -306,7 +306,7 @@ public:
         lower_V_spinbox->setObjectName(QStringLiteral("lower_V_spinbox"));
         lower_V_spinbox->setMinimum(0);
         lower_V_spinbox->setMaximum(255);
-        lower_V_spinbox->setValue(146);
+        lower_V_spinbox->setValue(0);
 
         horizontalLayout_7->addWidget(lower_V_spinbox);
 
@@ -314,8 +314,8 @@ public:
         lower_V_slider->setObjectName(QStringLiteral("lower_V_slider"));
         lower_V_slider->setMinimum(0);
         lower_V_slider->setMaximum(255);
-        lower_V_slider->setValue(130);
-        lower_V_slider->setSliderPosition(130);
+        lower_V_slider->setValue(0);
+        lower_V_slider->setSliderPosition(0);
         lower_V_slider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_7->addWidget(lower_V_slider);
@@ -336,7 +336,7 @@ public:
         upper_H_spinbox->setObjectName(QStringLiteral("upper_H_spinbox"));
         upper_H_spinbox->setMinimum(0);
         upper_H_spinbox->setMaximum(255);
-        upper_H_spinbox->setValue(50);
+        upper_H_spinbox->setValue(90);
 
         horizontalLayout_8->addWidget(upper_H_spinbox);
 
@@ -344,7 +344,7 @@ public:
         upper_H_slider->setObjectName(QStringLiteral("upper_H_slider"));
         upper_H_slider->setMinimum(0);
         upper_H_slider->setMaximum(255);
-        upper_H_slider->setValue(40);
+        upper_H_slider->setValue(84);
         upper_H_slider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_8->addWidget(upper_H_slider);
@@ -370,7 +370,7 @@ public:
         upper_S_slider->setObjectName(QStringLiteral("upper_S_slider"));
         upper_S_slider->setMinimum(0);
         upper_S_slider->setMaximum(255);
-        upper_S_slider->setValue(230);
+        upper_S_slider->setValue(255);
         upper_S_slider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_9->addWidget(upper_S_slider);
@@ -436,11 +436,11 @@ public:
         groupBox_7->setTitle(QApplication::translate("MainWindow", "Kd", nullptr));
         start_pid->setText(QApplication::translate("MainWindow", "Start", nullptr));
         stop_pid->setText(QApplication::translate("MainWindow", "Stop", nullptr));
-        groupBox_8->setTitle(QApplication::translate("MainWindow", "Edit lower HSV values: ", nullptr));
+        groupBox_8->setTitle(QApplication::translate("MainWindow", "Edit lower HSV values:", nullptr));
         groupBox_9->setTitle(QApplication::translate("MainWindow", "H", nullptr));
         groupBox_10->setTitle(QApplication::translate("MainWindow", "S", nullptr));
         groupBox_11->setTitle(QApplication::translate("MainWindow", "V", nullptr));
-        groupBox_12->setTitle(QApplication::translate("MainWindow", "Edit upper HSV values: ", nullptr));
+        groupBox_12->setTitle(QApplication::translate("MainWindow", "Edit upper HSV values:", nullptr));
         groupBox_13->setTitle(QApplication::translate("MainWindow", "H", nullptr));
         groupBox_14->setTitle(QApplication::translate("MainWindow", "S", nullptr));
         groupBox_15->setTitle(QApplication::translate("MainWindow", "V", nullptr));
